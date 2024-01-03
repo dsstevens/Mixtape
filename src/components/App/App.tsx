@@ -15,7 +15,7 @@ const App: React.FC<AppProps> = () => {
       <Routes>
         <Route path='/' element={<Home />} />
         <Route path='/:year' element={<AlbumsByYear />} />
-        <Route path='/:year/:album' element={<AlbumDetail />} />
+        <Route path='/:year/:album_id' element={<AlbumDetail />} />
       </Routes>
     </main>
   );
