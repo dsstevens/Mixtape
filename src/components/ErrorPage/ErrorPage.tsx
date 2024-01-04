@@ -1,8 +1,13 @@
 import React from "react";
-import "ErrorPage.css";
+import "./ErrorPage.css";
 
 const ErrorPage: React.FunctionComponent = () => {
-  return <h1>Error 404</h1>;
+  return (
+    <div className='error-container'>
+      <h1>404</h1>
+      <p>The page you are looking for cannot be found</p>
+    </div>
+  )
 };
 
 export default ErrorPage;
