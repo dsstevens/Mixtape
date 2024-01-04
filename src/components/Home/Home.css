@@ -1,0 +1,12 @@
+.Home {
+  background-color: #ffb1c7;
+  height: 100vh;
+}
+
+.dropdown {
+  position: absolute;
+}
+
+.tracklist-container {
+  border: 3px solid black;
+}
