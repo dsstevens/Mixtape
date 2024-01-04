@@ -1,3 +1,5 @@
+import './AlbumsByYear.css';
+
 import React from 'react';
 
 const AlbumsByYear = () => {

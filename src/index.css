@@ -1,7 +1,6 @@
-html, body, main, #root {
+html, body {
   margin: 0;
   padding: 0;
-  height: 100%;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
@@ -12,8 +11,4 @@ html, body, main, #root {
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
-}
-
-* {
-  box-sizing: border-box;
 }
