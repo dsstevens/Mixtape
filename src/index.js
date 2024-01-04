@@ -1,12 +1,11 @@
 import './index.css';
-
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { BrowserRouter } from 'react-router-dom';
-
 import App from './components/App/App';
-
 import reportWebVitals from './reportWebVitals';
+
+require('dotenv').config()
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
