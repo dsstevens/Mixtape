@@ -8,8 +8,6 @@ import App from './components/App/App';
 
 import reportWebVitals from './reportWebVitals';
 
-require('dotenv').config()
-
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <BrowserRouter>
