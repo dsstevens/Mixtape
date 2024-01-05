@@ -6,8 +6,8 @@ const getCollection = () => {
     headers: {
       'Content-Type': 'application/json',
       'Authorization': "Oauth" +
-        'oauth_consumer_key=EfqdrylBHIKqDqyHFnDo' +
-        'oauth_signature=TtLvAhhUXwTHVrROUcjSqRBGGIUqFFAc',
+      'oauth_consumer_key=' + process.env.REACT_APP_DISCOGS_CONSUMER_KEY +
+      'oauth_signature=' + process.env.REACT_APP_DISCOGS_CONSUMER_SECRET,
       'User-Agent': 'Mixtape Stretch'
     }
   })
