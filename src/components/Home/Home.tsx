@@ -1,12 +1,15 @@
 import './Home.css';
 
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import Tracklist from '../Tracklist/Tracklist';
 import Dropdown from '../Dropdown/Dropdown';
+import getCollection from '../../apiCalls';
 
 const Home = () => {
   const [open, setOpen] = useState(false);
+  const [collection, setCollection] = useState<{}[]>([]);
+  const [error, setError] = useState('');
 
   const handleOpen = () => {
     setOpen(!open);
@@ -16,6 +19,16 @@ const Home = () => {
     // add code to link to page based on the year
     setOpen(false);
   }
+
+  useEffect(() => {
+    getCollection()
+      .then(data => {
+        // leaving this console.log in temporarily so we can see the data in the console that we have to work with while we set everything up
+        console.log(data);
+        setCollection([...collection, ...data]);
+      })
+      .catch(error => setError(error.message));
+  }, []);
 
   return (
     <div className="Home">
