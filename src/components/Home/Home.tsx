@@ -1,19 +1,21 @@
 import './Home.css';
 
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 import Tracklist from '../Tracklist/Tracklist';
 import Dropdown from '../Dropdown/Dropdown';
 
 const Home = () => {
   const [open, setOpen] = useState(false);
+  const navigate = useNavigate();
 
   const handleOpen = () => {
     setOpen(!open);
   };
 
   const handleYear = (year: number) => {
-    // add code to link to page based on the year
+    navigate(`/${year}`);
     setOpen(false);
   }
 
