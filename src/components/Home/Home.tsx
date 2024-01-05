@@ -1,24 +1,16 @@
 import './Home.css';
-
-<<<<<<< HEAD
-import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-=======
 import React, { useEffect, useState } from 'react';
->>>>>>> main
-
 import Tracklist from '../Tracklist/Tracklist';
 import Dropdown from '../Dropdown/Dropdown';
 import getCollection from '../../apiCalls';
 
 const Home = () => {
   const [open, setOpen] = useState(false);
-<<<<<<< HEAD
+
   const navigate = useNavigate();
-=======
   const [collection, setCollection] = useState<{}[]>([]);
   const [error, setError] = useState('');
->>>>>>> main
 
   const handleOpen = () => {
     setOpen(!open);
