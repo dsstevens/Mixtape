@@ -34,8 +34,6 @@ const Home = () => {
 
   return (
     <div className="Home">
-      <h1 className='page-title'>MixTape</h1>
-
       <Dropdown
         open={open}
         trigger={<button className='years-dropdown-button' onClick={handleOpen}>Albums By Year</button>}
