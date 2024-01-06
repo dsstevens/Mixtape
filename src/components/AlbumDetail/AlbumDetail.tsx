@@ -1,6 +1,6 @@
 import React from 'react';
-import {useParams } from 'react-router-dom';
-import { getOneAlbum } from '../../apiCalls';
+import { useNavigate, useParams } from 'react-router-dom';
+import { getSingleAlbum } from '../../apiCalls';
 
 interface OneAlbum {
   id: number;
@@ -44,10 +44,50 @@ interface OneAlbum {
 }
 
 
-const AlbumDetail = () => {
-  return (
-    <p>placeholder</p>
-  );
-};
+const AlbumDetailPage() {
+  const [singleAlbum, setSingleAlbum] = useState({});
+  const [error, setError] = useState("");
+  const navigate = useNavigate()
+  const params = useParams()
+  const handleHomeClick = () => {
+    navigate("/")
+  }
 
-export default AlbumDetail;
+  useEffect(() => {
+    getSingleAlbum(id)
+  }, [])
+
+  let id = params.id
+
+  const fetchSingleAlbum = (id) => {
+    getSingleAlbum(id)
+    .then((data) => {
+      setSingleAlbum(data)
+    }).catch((error) => {
+      setError(error.message)
+    })
+  }
+
+  const tracks = singleAlbum.tracklist.map(album => {
+    return (
+      <div>
+        <p>{album.title}</p>
+        <p>{album.duration}</p>
+        <button>Add</button>
+      </div>
+    )
+  })
+
+  return (
+    <section>
+      <h2 className='album-title'>{singleAlbum.title}</h2>
+      <h3 className='artist-name'>{singleAlbum.artists[0].name}</h3>
+      <img src={singleAlbum.cover_image}/>
+      <section>
+        <p>{tracks}</p>
+      </section>
+    </section>
+  )
+
+}
+

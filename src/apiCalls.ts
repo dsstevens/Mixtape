@@ -19,7 +19,7 @@ export const getCollection = () => {
     });
 };
 
-export const getOneAlbum = (id: number): Promise<any> => {
+export const getSingleAlbum = (id: number): Promise<any> => {
   return fetch(`https://api.discogs.com/releases/${id}`)
   .then((response) => {
     if (!response.ok) {
