@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { getSingleAlbum } from "../../apiCalls";
+import { getSingleAlbum, getCollection } from "../../apiCalls";
 
 interface OneAlbum {
   id: number;
@@ -112,7 +112,6 @@ interface OneAlbum {
   estimated_weight: number;
   blocked_from_sale: boolean;
 }
-
  
 const AlbumDetailPage: React.FC = () => {
   const [singleAlbum, setSingleAlbum] = useState<OneAlbum | {}>({});
@@ -134,7 +133,7 @@ const AlbumDetailPage: React.FC = () => {
         if (err instanceof Error && err.message) {
           setError(err.message);
         } else {
-          setError("An unknown error occurred");
+          setError("An error fetching the album has occured");
         }
       }
     };
@@ -158,7 +157,7 @@ console.log("SINGLE ALBUM", singleAlbum)
       <h3 className="artist-name">
         {(singleAlbum as OneAlbum).artists?.[0]?.name}
       </h3>
-      <img src={(singleAlbum as OneAlbum).cover_image} alt="Album Cover" />
+      <img src={(singleAlbum as OneAlbum).images[0].resource_url} alt="Album Cover" />
       <section>
         <p>{tracks}</p>
       </section>
