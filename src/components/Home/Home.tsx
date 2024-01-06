@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 
 import Tracklist from '../Tracklist/Tracklist';
 import Dropdown from '../Dropdown/Dropdown';
-import getCollection from '../../apiCalls';
+import {getCollection} from '../../apiCalls';
 
 const Home = () => {
   const [open, setOpen] = useState(false);

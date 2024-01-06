@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { getSingleAlbum, getCollection } from "../../apiCalls";
+import { getSingleAlbum } from "../../apiCalls";
+import './AlbumDetail.css'
 
 interface OneAlbum {
   id: number;
@@ -144,23 +145,20 @@ const AlbumDetailPage: React.FC = () => {
 console.log("SINGLE ALBUM", singleAlbum)
 
   const tracks = (singleAlbum as OneAlbum).tracklist?.map((album) => (
-    <div key={album.title}>
-      <p>{album.title}</p>
-      <p>{album.duration}</p>
-      <button>Add</button>
+    <div className='tracks' key={album.title}>
+      <p>Song: {album.title}</p>
+      <p>Duration: {album.duration}</p>
+      <button className='add-button'>Add</button>
     </div>
   ));
 
   return (
     <section>
-      <h2 className="album-title">{(singleAlbum as OneAlbum).title}</h2>
-      <h3 className="artist-name">
-        {(singleAlbum as OneAlbum).artists?.[0]?.name}
-      </h3>
-      <img src={(singleAlbum as OneAlbum).images[0].resource_url} alt="Album Cover" />
-      <section>
-        <p>{tracks}</p>
-      </section>
+      <h2 className="album-title">Album Title: {(singleAlbum as OneAlbum).title}</h2>
+      <h3 className="artist-name">Artist: {(singleAlbum as OneAlbum).artists?.[0]?.name}</h3>
+      <div className='album-container'>
+        <div className='all-tracks'>{tracks}</div>
+      </div>
     </section>
   );
 };
