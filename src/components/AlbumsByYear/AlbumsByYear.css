@@ -3,26 +3,6 @@
     min-height: 100vh;
 }
 
-header {
-    padding: 30px;
-    background-color: #c5d32d;
-    text-align: right;
-}
-
-.home-button {
-    text-decoration: none;
-    color: black;
-    padding: 20px 40px;
-    border: 1px solid purple;
-    border-radius: 25px 25px 25px 25px;
-    background-color: transparent;
-    cursor: pointer;
-}
-
-.home-button:hover {
-    background-color: #ab63fb;
-}
-
 .year-title {
     color: purple;
     text-align: center;
