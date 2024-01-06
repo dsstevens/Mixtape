@@ -1,6 +1,6 @@
 import React from 'react';
 
-const AlbumDetail = () => {
+const AlbumDetail = ({}) => {
   return (
     <p>placeholder</p>
   );

@@ -20,3 +20,15 @@ const getCollection = () => {
 };
 
 export default getCollection;
+
+export const getAlbumInfo = (id: number): Promise<any> => {
+  return fetch(`https://api.discogs.com/releases/${id}`)
+  .then((response) => {
+    if (!response.ok) {
+      throw new Error(response.status.toString());
+    } else {
+      return response.json();
+    }
+  });
+};
+
