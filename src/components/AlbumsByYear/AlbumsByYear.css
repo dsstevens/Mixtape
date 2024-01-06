@@ -7,6 +7,8 @@ html, body {
 .albums-by-year-container {
     background-color: #da68b3;
     padding: 20px;
+    font-family: 'Averia Serif Libre', serif;
+    font-family: 'Silkscreen', sans-serif;
 }
 
 .album-grid {
@@ -14,6 +16,8 @@ html, body {
     grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
     gap: 20px;
     padding: 20px;
+    font-family: 'Averia Serif Libre', serif;
+    font-family: 'Silkscreen', sans-serif;
 }
 
 .album {
@@ -64,6 +68,7 @@ html, body {
     border: 2px solid #fff;
     border-radius: 5px;
     color: black;
+
     font-weight: bold;
     transition: transform 0.1s ease-in-out, background-color 0.1s ease-in-out;
 }
