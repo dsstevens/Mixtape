@@ -1,6 +1,6 @@
-import React from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
-import { getSingleAlbum } from '../../apiCalls';
+import React, { useEffect, useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
+import { getSingleAlbum } from "../../apiCalls";
 
 interface OneAlbum {
   id: number;
@@ -43,51 +43,62 @@ interface OneAlbum {
   };
 }
 
+import React, { useEffect, useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
+import { getSingleAlbum } from "../../apiCalls";
 
-const AlbumDetailPage() {
-  const [singleAlbum, setSingleAlbum] = useState({});
-  const [error, setError] = useState("");
-  const navigate = useNavigate()
-  const params = useParams()
+interface OneAlbum {
+  // ... (your existing interface)
+}
+
+const AlbumDetailPage: React.FC = () => {
+  const [singleAlbum, setSingleAlbum] = useState<OneAlbum | {}>({});
+  const [error, setError] = useState<string>("");
+  const navigate = useNavigate();
+  const params = useParams<{ id: string }>();
+  const id:number = 63993; // Declare id before useEffect
+
   const handleHomeClick = () => {
-    navigate("/")
-  }
+    navigate("/");
+  };
 
   useEffect(() => {
-    getSingleAlbum(id)
-  }, [])
+    const fetchSingleAlbum = async () => {
+      try {
+        const data = await getSingleAlbum(id);
+        setSingleAlbum(data);
+      } catch (err) {
+        if (err instanceof Error && err.message) {
+          setError(err.message);
+        } else {
+          setError("An unknown error occurred");
+        }
+      }
+    };
 
-  let id = params.id
+    fetchSingleAlbum();
+  }, [id]); 
 
-  const fetchSingleAlbum = (id) => {
-    getSingleAlbum(id)
-    .then((data) => {
-      setSingleAlbum(data)
-    }).catch((error) => {
-      setError(error.message)
-    })
-  }
-
-  const tracks = singleAlbum.tracklist.map(album => {
-    return (
-      <div>
-        <p>{album.title}</p>
-        <p>{album.duration}</p>
-        <button>Add</button>
-      </div>
-    )
-  })
+  const tracks = (singleAlbum as OneAlbum).tracklist?.map((album) => (
+    <div key={album.title}>
+      <p>{album.title}</p>
+      <p>{album.duration}</p>
+      <button>Add</button>
+    </div>
+  ));
 
   return (
     <section>
-      <h2 className='album-title'>{singleAlbum.title}</h2>
-      <h3 className='artist-name'>{singleAlbum.artists[0].name}</h3>
-      <img src={singleAlbum.cover_image}/>
+      <h2 className="album-title">{(singleAlbum as OneAlbum).title}</h2>
+      <h3 className="artist-name">
+        {(singleAlbum as OneAlbum).artists?.[0]?.name}
+      </h3>
+      <img src={(singleAlbum as OneAlbum).cover_image} alt="Album Cover" />
       <section>
         <p>{tracks}</p>
       </section>
     </section>
-  )
+  );
+};
 
-}
-
+export default AlbumDetailPage;
