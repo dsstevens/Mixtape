@@ -57,3 +57,29 @@ header {
   color: purple;
   text-align: center;
 }
+
+.album-link {
+    text-decoration: none;
+  }
+
+.album {
+    background-color: #c5d32d;
+    padding: 10px;
+    margin: 10px;
+    cursor: pointer;
+    border: 2px solid #fff;
+    border-radius: 5px;
+    color: #fff;
+    font-weight: bold;
+    transition: transform 0.1s ease-in-out, background-color 0.1s ease-in-out;
+}
+  
+.album:hover {
+    transform: translateY(-2px);
+    background-color: #ffb1c7;
+}
+
+.album:active {
+    transform: translateY(2px);
+    background-color: #ab63fb;
+}

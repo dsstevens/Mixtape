@@ -3,10 +3,16 @@ import React, { useEffect, useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import getCollection from '../../apiCalls';
 
+interface Artist {
+  name: string;
+}
+
 interface BasicInformation {
-  title: string
-  year: number
-  cover_image: string
+  title: string;
+  year: number;
+  cover_image: string;
+  master_id: string;
+  artists: Artist[];
 }
 
 interface Release {
@@ -15,7 +21,7 @@ interface Release {
 
 const AlbumsByYear = () => {
   const { year } = useParams<string>();
-  const [albums, setAlbums] = useState<BasicInformation[]>([])
+  const [albums, setAlbums] = useState<BasicInformation[]>([]);
 
   const fetchAlbums = async () => {
     if (year) {
@@ -56,14 +62,15 @@ const AlbumsByYear = () => {
       <h2 className="year-title">Albums from the Year {year}</h2>
       <div className="album-grid">
         {albums.map((album, index) => (
-          <div key={index} className="album">
-            <img src={album.cover_image} /*alt={album.title}*/ />
-            <p className="album-title">{album.title}</p>
-          </div>
+          <Link to={`/${year}/${album.master_id}`} key={index} className="album-link">
+            <div className="album">
+              <p className="album-title">{`${album.artists.map(artist => artist.name).join(', ')} - ${album.title}`}</p>
+            </div>
+          </Link>
         ))}
       </div>
     </div>
-  )
-}
+  );
+};
 
 export default AlbumsByYear;
