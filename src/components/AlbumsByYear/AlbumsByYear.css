@@ -1,12 +1,42 @@
+html, body {
+    min-height: 100vh;
+    margin: 0;
+    padding: 0;
+}
+  
 .albums-by-year-container {
     background-color: #ffb1c7;
-    min-height: 100vh;
+    padding: 20px;
 }
-
+ 
 header {
     padding: 30px;
     background-color: #c5d32d;
     text-align: right;
+}
+
+.album-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 20px;
+    padding: 20px;
+}
+
+.album {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    padding: 10px;
+    text-align: center;
+}
+ 
+.album-cover {
+    max-width: 100%;
+    height: auto;
+    border-radius: 10px;
+}
+  
+.album-title {
+    margin-top: 10px;
 }
 
 .home-button {
@@ -27,5 +57,3 @@ header {
     color: purple;
     text-align: center;
 }
-
-
