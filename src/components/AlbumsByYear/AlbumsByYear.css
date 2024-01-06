@@ -5,14 +5,8 @@ html, body {
 }
   
 .albums-by-year-container {
-    background-color: #ffb1c7;
+    background-color: #da68b3;
     padding: 20px;
-}
- 
-header {
-    padding: 30px;
-    background-color: #c5d32d;
-    text-align: right;
 }
 
 .album-grid {
@@ -54,7 +48,7 @@ header {
 }
 
 .year-title {
-  color: purple;
+  color: black;
   text-align: center;
 }
 
@@ -63,20 +57,20 @@ header {
   }
 
 .album {
-    background-color: #c5d32d;
+    background-color: #eeee9c;
     padding: 10px;
     margin: 10px;
     cursor: pointer;
     border: 2px solid #fff;
     border-radius: 5px;
-    color: #fff;
+    color: black;
     font-weight: bold;
     transition: transform 0.1s ease-in-out, background-color 0.1s ease-in-out;
 }
   
 .album:hover {
     transform: translateY(-2px);
-    background-color: #ffb1c7;
+    background-color: #89b759;
 }
 
 .album:active {
