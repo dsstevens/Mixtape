@@ -8,7 +8,7 @@ const AlbumsByYear = () => {
   return (
     <div className="albums-by-year-container">
       <h2 className="year-title">Albums from the Year {year}</h2>
-            {/* grid rendering */}
+      {/* grid rendering */}
     </div>
   );
 };

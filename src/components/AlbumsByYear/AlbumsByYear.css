@@ -1,11 +1,9 @@
 .albums-by-year-container {
-    background-color: #ffb1c7;
-    min-height: 100vh;
+  background-color: #ffb1c7;
+  min-height: 100vh;
 }
 
 .year-title {
-    color: purple;
-    text-align: center;
+  color: purple;
+  text-align: center;
 }
-
-

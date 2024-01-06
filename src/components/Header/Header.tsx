@@ -1,15 +1,18 @@
 import './Header.css';
-
 import React from "react";
-import { Link } from 'react-router-dom';
 
-const Header = () => {
+type HeaderProps = {
+  children: React.ReactNode;
+  isHomePage: boolean;
+};
+
+const Header: React.FC<HeaderProps> = ({ children, isHomePage }) => {
   return (
     <header>
-      <h1 className='page-title'>MixTape</h1>
-      <Link to="/" className="home-button">Home</Link>
+      <h1 className={`page-title ${isHomePage ? 'header' : 'page-title-shifted'}`}>MixTape</h1>
+      {children}
     </header>
-  )
-}
+  );
+};
 
 export default Header;

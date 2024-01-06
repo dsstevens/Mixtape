@@ -6,25 +6,9 @@ header {
 }
 
 .page-title {
-  font-family: 'Rubik 80s Fade', system-ui;
+  font-family: 'Press Start 2P', system-ui;
   align-self: center;
   flex-grow: 2;
-  margin-left: 10rem;
-}
-
-.home-button {
-  font-family: 'Press Start 2P', system-ui;
-  justify-self: right;
-  text-decoration: none;
-  color: black;
-  margin: 1%;
-  padding: 20px 40px;
-  border: 1px solid purple;
-  border-radius: 25px 25px 25px 25px;
-  background-color: transparent;
-  cursor: pointer;
-}
-
-.home-button:hover {
-  background-color: #ab63fb;
+  padding-top: 5px;
+  padding-bottom: 5px;
 }
