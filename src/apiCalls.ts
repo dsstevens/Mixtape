@@ -1,6 +1,6 @@
 const collectionUrl = 'https://api.discogs.com/users/mixtapestretch/collection/folders/0/releases';
 
-const getCollection = () => {
+export const getCollection = () => {
   return fetch(collectionUrl, {
     method: 'GET',
     headers: {
@@ -19,9 +19,7 @@ const getCollection = () => {
     });
 };
 
-export default getCollection;
-
-export const getAlbumInfo = (id: number): Promise<any> => {
+export const getOneAlbum = (id: number): Promise<any> => {
   return fetch(`https://api.discogs.com/releases/${id}`)
   .then((response) => {
     if (!response.ok) {
