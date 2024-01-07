@@ -36,17 +36,13 @@ interface AlbumDetailPageProps {
 const AlbumDetailPage = (props: AlbumDetailPageProps) => {
   const { allAlbums } = props;
   const [singleAlbum, setSingleAlbum] = useState<OneAlbum | {}>({});
+  const [clickedTracks, setClickedTracks] = useState<Record<number, boolean>>({});
   const [error, setError] = useState<string>("");
   const navigate = useNavigate();
   const params = useParams()
   console.log("PARAMS", params.album_id)
   const id = parseInt(params.album_id as string);
   
-
-  const handleHomeClick = () => {
-    navigate("/");
-  };
-
   useEffect(() => {
     const fetchSingleAlbum = async () => {
       try {
@@ -62,13 +58,21 @@ const AlbumDetailPage = (props: AlbumDetailPageProps) => {
     }
   }, [id]); 
 
-console.log("SINGLE ALBUM", singleAlbum)
+  console.log("SINGLE ALBUM", singleAlbum)
 
-  const tracks = (singleAlbum as OneAlbum).tracklist?.map((album) => (
-    <div className='tracks' key={album.title}>
+  const handleClick = (trackIndex: number) => {
+    setClickedTracks(prevState => ({
+      ...prevState,
+      [trackIndex]: true,
+    }));
+  };
+
+  const tracks = (singleAlbum as OneAlbum).tracklist?.map((album, index) => (
+    <div className="tracks" key={album.title}>
       <p>Song: {album.title}</p>
       <p>Duration: {album.duration}</p>
-      <button className='add-button'>Add</button>
+      {clickedTracks[index] && <span className='check-mark'> Added ✅</span>}
+      {!clickedTracks[index] && <button onClick={() => handleClick(index)} className='add-button'>Add</button>}
     </div>
   ));
 
