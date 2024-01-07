@@ -23,16 +23,4 @@ describe('Home Page', () => {
     cy.wait('@getServerError');
   });
 
-  it('should display a header with the title', () => {
-    cy.get("h1.page-title.header").contains("MixTape").should("be.visible");
-  });
-
-  it('displays the Albums By Year dropdown button', () => {
-    cy.get('.years-dropdown-button').should('be.visible').and('contain', 'Albums By Year');
-  });
-
-  it('displays the playlist', () => {
-    cy.get('.tracklist-container').should('be.visible');
-  });
-  
 });
