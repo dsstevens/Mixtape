@@ -122,6 +122,7 @@ interface BasicInformation {
   title: string;
   year: number;
   cover_image: string;
+  id: string;
   master_id: string;
   artists: Artist[];
 }

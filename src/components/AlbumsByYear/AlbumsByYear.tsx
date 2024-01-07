@@ -10,6 +10,7 @@ interface BasicInformation {
   title: string;
   year: number;
   cover_image: string;
+  id: string;
   master_id: string;
   artists: Artist[];
 }
@@ -70,7 +71,7 @@ const AlbumsByYear = (props: AlbumsByYearProps) => {
       <div className="album-grid">
         {filteredAlbums.map((album, index) => (
           <Link
-            to={`/${year}/${album.master_id}`}
+            to={`/${year}/${album.id}`}
             key={index}
             className="album-link"
           >
