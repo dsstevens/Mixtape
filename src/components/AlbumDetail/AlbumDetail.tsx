@@ -29,19 +29,36 @@ interface BasicInformation {
   artists: Artist[];
 }
 
+interface Track {
+  duration: string;
+  position: string;
+  title: string;
+  type_: string;
+}
+
 interface AlbumDetailPageProps {
   allAlbums: BasicInformation[];
+  // addSong: (track: Track) => void;
 }
 
 const AlbumDetailPage = (props: AlbumDetailPageProps) => {
-  const { allAlbums } = props;
+  const { allAlbums} = props;
   const [singleAlbum, setSingleAlbum] = useState<OneAlbum | {}>({});
+  const [tracklist, setTracklist] = useState<Track[]>([])
   const [error, setError] = useState<string>("");
   const navigate = useNavigate();
   const params = useParams()
   console.log("PARAMS", params.album_id)
   const id = parseInt(params.album_id as string);
   
+  const addSong = (title: string) => {
+   let foundTrack  = (singleAlbum as OneAlbum).tracklist.find(single => single.title === title)
+    setTracklist([...tracklist, foundTrack])
+  }
+
+  
+
+     console.log("SONG", (singleAlbum as OneAlbum).tracklist);
 
   const handleHomeClick = () => {
     navigate("/");
@@ -68,7 +85,7 @@ console.log("SINGLE ALBUM", singleAlbum)
     <div className='tracks' key={album.title}>
       <p>Song: {album.title}</p>
       <p>Duration: {album.duration}</p>
-      <button className='add-button'>Add</button>
+      <button onClick={() => addSong()} className='add-button'>Add</button>
     </div>
   ));
 
