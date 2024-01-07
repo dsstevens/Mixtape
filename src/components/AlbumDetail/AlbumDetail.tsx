@@ -113,13 +113,32 @@ interface OneAlbum {
   estimated_weight: number;
   blocked_from_sale: boolean;
 }
- 
-const AlbumDetailPage: React.FC = () => {
+
+interface Artist {
+  name: string;
+}
+
+interface BasicInformation {
+  title: string;
+  year: number;
+  cover_image: string;
+  master_id: string;
+  artists: Artist[];
+}
+
+interface AlbumDetailPageProps {
+  allAlbums: BasicInformation[];
+}
+
+const AlbumDetailPage = (props: AlbumDetailPageProps) => {
+  const { allAlbums } = props;
   const [singleAlbum, setSingleAlbum] = useState<OneAlbum | {}>({});
   const [error, setError] = useState<string>("");
   const navigate = useNavigate();
-  const params = useParams<{ id: string }>();
-  const id:number = 63993; // Declare id before useEffect
+  const params = useParams()
+  console.log("PARAMS", params.album_id)
+  const id = parseInt(params.album_id as string);
+  
 
   const handleHomeClick = () => {
     navigate("/");
