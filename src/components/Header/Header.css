@@ -1,8 +1,8 @@
 header {
   display: flex;
   flex-direction: row;
-  text-align: center;
-  justify-content: center;
+  justify-content: space-around;
+  align-items:center;
   background-color: #c5d32d;
 }
 
@@ -10,11 +10,6 @@ header {
   font-family: 'Press Start 2P', system-ui;
   padding-top: 5px;
   padding-bottom: 5px;
-}
-
-/* LARGE BREAKPOINT */
-@media screen and (max-width: 1450px) {
-  
 }
 
 /* MEDIUM BREAKPOINT */
