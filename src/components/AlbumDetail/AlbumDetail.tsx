@@ -29,19 +29,65 @@ interface BasicInformation {
   artists: Artist[];
 }
 
-interface AlbumDetailPageProps {
-  allAlbums: BasicInformation[];
+interface Track {
+  duration: string;
+  position: string;
+  title: string;
+  type_: string;
 }
 
+interface AlbumDetailPageProps {
+  allAlbums: BasicInformation[];
+  // addSong: (track: Track) => void;
+}
+
+interface ClickedTracks {
+  [key: string]: boolean; // or any other type for track numbers
+}
+
+
 const AlbumDetailPage = (props: AlbumDetailPageProps) => {
-  const { allAlbums } = props;
+  const { allAlbums} = props;
   const [singleAlbum, setSingleAlbum] = useState<OneAlbum | {}>({});
+  const [clickedTracks, setClickedTracks] = useState<Record<number, boolean>>({});
+  const [savedTracks, setSavedTracks] = useState<Track[]>([])
   const [error, setError] = useState<string>("");
   const navigate = useNavigate();
   const params = useParams()
-  console.log("PARAMS", params.album_id)
+  // console.log("PARAMS", params.album_id)
   const id = parseInt(params.album_id as string);
   
+  // const addSong = (title: string) => {
+  //  let foundTrack  = (singleAlbum as OneAlbum).tracklist.find(single => single.title === title)
+  //   setTracklist([...tracklist, foundTrack])
+  // }
+
+  const handleClick = (trackIndex: number) => {
+    setClickedTracks((prevState) => ({
+      ...prevState,
+      [trackIndex]: true,
+    }));
+    getTracks()
+    // console.log("SAVED TRACKS", savedTracks)
+  };
+  
+ const getTracks = () => {
+   let arr: Track[] = [];
+   let keys = Object.keys(clickedTracks);
+
+    (singleAlbum as OneAlbum).tracklist.forEach(
+     (single, index) => {
+       if (keys.includes(index.toString())) {
+         arr.push(single);
+       }
+     }
+   );
+   setSavedTracks(arr)
+ };
+
+  // console.log("CLICKED TRACKS", clickedTracks)
+
+     console.log("SONG", (singleAlbum as OneAlbum).tracklist);
 
   const handleHomeClick = () => {
     navigate("/");
@@ -64,13 +110,22 @@ const AlbumDetailPage = (props: AlbumDetailPageProps) => {
 
 console.log("SINGLE ALBUM", singleAlbum)
 
-  const tracks = (singleAlbum as OneAlbum).tracklist?.map((album) => (
+  const tracks = (singleAlbum as OneAlbum).tracklist?.map((album, index) => (
     <div className='tracks' key={album.title}>
       <p>Song: {album.title}</p>
       <p>Duration: {album.duration}</p>
-      <button className='add-button'>Add</button>
+      {clickedTracks[index] && <span className='add-button'> Added ✅</span>}
+      {!clickedTracks[index] && <button onClick={() => handleClick(index)} className='add-button'>Add</button>}
     </div>
   ));
+
+ const clickedSingles: JSX.Element[] = savedTracks.map(track => {
+  return (
+    <div key={track.title}>
+      <p>{track.title}</p>
+    </div>
+  );
+ })
 
   return (
     <section>
@@ -78,6 +133,7 @@ console.log("SINGLE ALBUM", singleAlbum)
       <h3 className="artist-name">Artist: {(singleAlbum as OneAlbum).artists?.[0]?.name}</h3>
       <div className='album-container'>
         <div className='all-tracks'>{tracks}</div>
+        <div>{clickedSingles}</div>
       </div>
     </section>
   );

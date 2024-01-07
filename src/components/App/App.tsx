@@ -29,11 +29,24 @@ interface Release {
   basic_information: BasicInformation;
 }
 
+// interface Track {
+// duration: string;
+// position: string;
+// title: string;
+// type_: string;
+// }
+
 const App: React.FC<AppProps> = () => {
   const location = useLocation();
   const isHomePage = location.pathname === '/';
 
   const [albums, setAlbums] = useState<BasicInformation[]>([]);
+  // const [tracklist, setTracklist] = useState<Track[]>([])
+
+  // const addSong = (track: Track) => {
+  //   const song = singleAlbum
+  //   setTracklist([...tracklist, track])
+  // }
 
   const fetchAlbums = async () => {
       try {
@@ -75,7 +88,7 @@ const App: React.FC<AppProps> = () => {
         <Route path="/:year" element={<AlbumsByYear allAlbums={albums} />} />
         <Route
           path="/:year/:album_id"
-          element={<AlbumDetail allAlbums={albums} />}
+          element={<AlbumDetail allAlbums={albums}/>}
         />
       </Routes>
     </main>
