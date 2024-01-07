@@ -41,6 +41,11 @@ interface AlbumDetailPageProps {
   // addSong: (track: Track) => void;
 }
 
+interface ClickedTracks {
+  [key: string]: boolean; // or any other type for track numbers
+}
+
+
 const AlbumDetailPage = (props: AlbumDetailPageProps) => {
   const { allAlbums} = props;
   const [singleAlbum, setSingleAlbum] = useState<OneAlbum | {}>({});
@@ -49,7 +54,7 @@ const AlbumDetailPage = (props: AlbumDetailPageProps) => {
   const [error, setError] = useState<string>("");
   const navigate = useNavigate();
   const params = useParams()
-  console.log("PARAMS", params.album_id)
+  // console.log("PARAMS", params.album_id)
   const id = parseInt(params.album_id as string);
   
   // const addSong = (title: string) => {
@@ -62,19 +67,25 @@ const AlbumDetailPage = (props: AlbumDetailPageProps) => {
       ...prevState,
       [trackIndex]: true,
     }));
+    getTracks()
+    // console.log("SAVED TRACKS", savedTracks)
   };
   
  const getTracks = () => {
-  let arr = []
-  let keys = Object.keys(clickedTracks);
-  let foundTrack = (singleAlbum as OneAlbum).tracklist.forEach(single => {
-    keys.forEach(num => {
-      arr.push(single[num])
-    })
-  })
- }
+   let arr: Track[] = [];
+   let keys = Object.keys(clickedTracks);
 
-  console.log("CLICKED TRACKS", clickedTracks)
+    (singleAlbum as OneAlbum).tracklist.forEach(
+     (single, index) => {
+       if (keys.includes(index.toString())) {
+         arr.push(single);
+       }
+     }
+   );
+   setSavedTracks(arr)
+ };
+
+  // console.log("CLICKED TRACKS", clickedTracks)
 
      console.log("SONG", (singleAlbum as OneAlbum).tracklist);
 
@@ -108,12 +119,21 @@ console.log("SINGLE ALBUM", singleAlbum)
     </div>
   ));
 
+ const clickedSingles: JSX.Element[] = savedTracks.map(track => {
+  return (
+    <div key={track.title}>
+      <p>{track.title}</p>
+    </div>
+  );
+ })
+
   return (
     <section>
       <h2 className="album-title">Album Title: {(singleAlbum as OneAlbum).title}</h2>
       <h3 className="artist-name">Artist: {(singleAlbum as OneAlbum).artists?.[0]?.name}</h3>
       <div className='album-container'>
         <div className='all-tracks'>{tracks}</div>
+        <div>{clickedSingles}</div>
       </div>
     </section>
   );
