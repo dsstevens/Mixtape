@@ -45,7 +45,7 @@ const AlbumDetailPage = (props: AlbumDetailPageProps) => {
   const { allAlbums} = props;
   const [singleAlbum, setSingleAlbum] = useState<OneAlbum | {}>({});
   const [clickedTracks, setClickedTracks] = useState<Record<number, boolean>>({});
-  const [tracklist, setTracklist] = useState<Track[]>([])
+  const [savedTracks, setSavedTracks] = useState<Track[]>([])
   const [error, setError] = useState<string>("");
   const navigate = useNavigate();
   const params = useParams()
@@ -64,6 +64,17 @@ const AlbumDetailPage = (props: AlbumDetailPageProps) => {
     }));
   };
   
+ const getTracks = () => {
+  let arr = []
+  let keys = Object.keys(clickedTracks);
+  let foundTrack = (singleAlbum as OneAlbum).tracklist.forEach(single => {
+    keys.forEach(num => {
+      arr.push(single[num])
+    })
+  })
+ }
+
+  console.log("CLICKED TRACKS", clickedTracks)
 
      console.log("SONG", (singleAlbum as OneAlbum).tracklist);
 
@@ -88,12 +99,11 @@ const AlbumDetailPage = (props: AlbumDetailPageProps) => {
 
 console.log("SINGLE ALBUM", singleAlbum)
 
-  const tracks = (singleAlbum as OneAlbum).tracklist?.map((album) => (
+  const tracks = (singleAlbum as OneAlbum).tracklist?.map((album, index) => (
     <div className='tracks' key={album.title}>
       <p>Song: {album.title}</p>
       <p>Duration: {album.duration}</p>
-      <button className='add-button'>Add</button>
-      {clickedTracks[index] && <span className='check-mark'> Added ✅</span>}
+      {clickedTracks[index] && <span className='add-button'> Added ✅</span>}
       {!clickedTracks[index] && <button onClick={() => handleClick(index)} className='add-button'>Add</button>}
     </div>
   ));
