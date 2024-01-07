@@ -44,6 +44,7 @@ interface AlbumDetailPageProps {
 const AlbumDetailPage = (props: AlbumDetailPageProps) => {
   const { allAlbums} = props;
   const [singleAlbum, setSingleAlbum] = useState<OneAlbum | {}>({});
+  const [clickedTracks, setClickedTracks] = useState<Record<number, boolean>>({});
   const [tracklist, setTracklist] = useState<Track[]>([])
   const [error, setError] = useState<string>("");
   const navigate = useNavigate();
@@ -51,11 +52,17 @@ const AlbumDetailPage = (props: AlbumDetailPageProps) => {
   console.log("PARAMS", params.album_id)
   const id = parseInt(params.album_id as string);
   
-  const addSong = (title: string) => {
-   let foundTrack  = (singleAlbum as OneAlbum).tracklist.find(single => single.title === title)
-    setTracklist([...tracklist, foundTrack])
-  }
+  // const addSong = (title: string) => {
+  //  let foundTrack  = (singleAlbum as OneAlbum).tracklist.find(single => single.title === title)
+  //   setTracklist([...tracklist, foundTrack])
+  // }
 
+  const handleClick = (trackIndex: number) => {
+    setClickedTracks((prevState) => ({
+      ...prevState,
+      [trackIndex]: true,
+    }));
+  };
   
 
      console.log("SONG", (singleAlbum as OneAlbum).tracklist);
@@ -85,7 +92,9 @@ console.log("SINGLE ALBUM", singleAlbum)
     <div className='tracks' key={album.title}>
       <p>Song: {album.title}</p>
       <p>Duration: {album.duration}</p>
-      <button onClick={() => addSong()} className='add-button'>Add</button>
+      <button className='add-button'>Add</button>
+      {clickedTracks[index] && <span className='check-mark'> Added ✅</span>}
+      {!clickedTracks[index] && <button onClick={() => handleClick(index)} className='add-button'>Add</button>}
     </div>
   ));
 
