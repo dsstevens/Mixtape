@@ -36,7 +36,6 @@ const App: React.FC<AppProps> = () => {
   const [albums, setAlbums] = useState<BasicInformation[]>([]);
 
   const fetchAlbums = async () => {
-   // if (year) {
       try {
         let allAlbums: BasicInformation[] = [];
         let page = 1;
@@ -56,15 +55,10 @@ const App: React.FC<AppProps> = () => {
           page++;
         }
 
-        // const yearNum = parseInt(year, 10);
-        // const filteredAlbums = allAlbums.filter(
-        //   (album) => album.year === yearNum
-        // );
         setAlbums(allAlbums);
       } catch (error) {
         console.error("Error fetching collection:", error);
       }
-    // }
   };
 
   useEffect(() => {
