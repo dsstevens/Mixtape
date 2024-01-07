@@ -1,7 +1,6 @@
 import './AlbumsByYear.css';
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { useParams, Link } from 'react-router-dom';
-// import {getCollection} from '../../apiCalls';
 
 interface Artist {
   name: string;
@@ -15,10 +14,6 @@ interface BasicInformation {
   artists: Artist[];
 }
 
-// interface Release {
-//   basic_information: BasicInformation;
-// }
-
 interface AlbumsByYearProps {
   allAlbums: BasicInformation[];
 }
@@ -26,41 +21,6 @@ interface AlbumsByYearProps {
 const AlbumsByYear = (props: AlbumsByYearProps) => {
   const { allAlbums } = props
   const { year } = useParams<string>();
-  // const [albums, setAlbums] = useState<BasicInformation[]>([]);
-
-  // const fetchAlbums = async () => {
-  //   if (year) {
-  //     try {
-  //       let allAlbums: BasicInformation[] = []
-  //       let page = 1
-  //       const perPage = 50
-  //       let totalPages = 1
-
-  //       while (page <= totalPages) {
-  //         const response = await getCollection(page, perPage)
-  //         const newAlbums: BasicInformation[] = response.releases.map((release: Release) => release.basic_information);
-  //         allAlbums = allAlbums.concat(newAlbums)
-
-  //         if (page === 1) {
-  //           totalPages = response.pagination.pages
-  //         }
-  //         page++
-  //       }
-
-  //       const yearNum = parseInt(year, 10);
-  //       const filteredAlbums = allAlbums.filter(album => album.year === yearNum)
-  //       setAlbums(filteredAlbums)
-  //     } catch (error) {
-  //       console.error('Error fetching collection:', error)
-  //     }
-  //   }
-  // };
-
-  // useEffect(() => {
-  //   fetchAlbums()
-  // }, [year])
-
-  // console.log(albums)
 
         const yearNum = parseInt(year as string, 10);
         const filteredAlbums = allAlbums.filter(album => album.year === yearNum)

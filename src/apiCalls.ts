@@ -25,26 +25,15 @@ export const getCollection = async (page = 1, perPage = 50) => {
 };
 
 export const getSingleAlbum = async (id: number): Promise<any> => {
-  // return fetch(`https://api.discogs.com/releases/${id}`).then((response) => {
-  //   if (!response.ok) {
-  //     console.log("Hey")
-  //     throw new Error(response.status.toString());
-  //   } else {
-  //     return response.json();
-  //   }
-  // });
-
+  const url = `https://api.discogs.com/releases/${id}`;
   try {
-    const response = await fetch(`https://api.discogs.com/releases/${id}`, {
+    const response = await fetch(url, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
-        Authorization:
-          "Oauth" +
-          "oauth_consumer_key=" +
-          process.env.REACT_APP_DISCOGS_CONSUMER_KEY +
-          "oauth_signature=" +
-          process.env.REACT_APP_DISCOGS_CONSUMER_SECRET,
+        "Authorization": "Oauth" +
+          "oauth_consumer_key=" + process.env.REACT_APP_DISCOGS_CONSUMER_KEY +
+          "oauth_signature=" + process.env.REACT_APP_DISCOGS_CONSUMER_SECRET,
         "User-Agent": "Mixtape Stretch",
       },
     });
@@ -54,6 +43,7 @@ export const getSingleAlbum = async (id: number): Promise<any> => {
     }
     return await response.json();
   } catch (error) {
-    console.error("Error fetching collection:", error);
+    console.error("Error fetching album details:", error);
+    throw error;
   }
 };
