@@ -44,6 +44,7 @@ const Home = () => {
 
       <div className='tracklist-container'>
         <Tracklist />
+        <p className='image-credits'>Image by janoon028 on Freepik</p>
       </div>
     </div>
   );
